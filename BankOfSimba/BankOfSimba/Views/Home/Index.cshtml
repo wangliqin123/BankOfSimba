@@ -1,0 +1,35 @@
+﻿@model BankOfSimba.ViewModels.Home.HomeViewModel
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/style.css")" />
+</head>
+<body>
+    <table>
+        <tr>
+            <td>Index</td>
+            <td>Name</td>
+            <td>Species</td>
+            <td>Wealth in Zebras</td>
+            <td>Role</td>
+            <td>Donate</td>
+        </tr>
+        @{ int index = 0; }
+            @foreach (var account in Model.accounts)
+            {
+                <tr style="@((@account.IsKing) ? "color:gold" : "color:crimson") ">
+                    <td>@(++index)</td>
+                    <td>@account.Name</td>
+                    <td>@account.AnimalType</td>
+                    <td>@account.Balance.ToString("0.00") @account.Currency</td>
+                    <td>@((@account.IsGood) ? "Good One" : "Bad Guy")</td>
+                    @using (Html.BeginForm("action", "home"))
+                    {
+                     <td><input type="submit" value="Raise" /></td>
+                    }
+                </tr>               
+            }
+    </table>
+</body>
+</html>
